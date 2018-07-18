@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css" media="screen">
+		* {
+			margin: 0;
+			padding: 0;
+		}	
+		#box {
+			width: 800px;
+			height: 400px;
+			margin: 0 auto;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript" src="js/highcharts.js"></script>
+	<script type="text/javascript">
+	Highcharts.chart("box", {
+		// 标题
+		title: {
+			text: "北京天气"
+		},
+		chart: {
+	        backgroundColor: {
+	            linearGradient: [0, 0, 500, 500],
+	            stops: [
+	                [0, 'rgb(111, 155, 233)'],
+	                [1, 'rgb(123, 188, 200)']
+	            ]
+	        },
+	        type: 'line'
+	    },
+		// 数据列
+		series: [
+			{
+				name: "",
+				data: [26, 29, 32, 31, 29, 28, 27, 27, 29]
+			}
+		],
+		xAxis: {
+			title: {
+				text: "",
+
+			},
+			labels: {
+				style: {
+					color: "white"
+				}
+			},
+			// 标签分类
+			categories: (function() {
+				// 获取事件
+				var hour = (new Date()).getHours();
+				console.log(hour);
+				// 定义数组
+				var arr= [];
+
+				for (var i = 0; i < 9; i++) {
+					if (i === 0) {
+						arr.push("现在");
+					} else if(i === 1) {
+						arr.push((hour + 1 * i )+ "点");
+					} else {
+						var item = (hour + 3 * i - 2) % 24 + "";
+						if (item.length === 1) {
+							item = "0" + item;
+						}
+						arr.push(item + "点");
+
+					}
+				}
+				// 返回数组
+				return arr;
+			})()
+		},
+		yAxis: {
+			title: {
+				text: ""
+			},
+			labels: {
+				style: {
+					color: "white"
+				}
+			}
+		},
+		 plotOptions: {
+	        series: {
+	        	color: "white",
+	            dataLabels: {
+	            	color: "white",
+	                enabled: true,
+	                style:{
+					color:"contrast",
+					fontSize:"11px",
+					fontWeight:"bold",
+					textOutline:"0px none"
+					}
+	            }
+	        }
+	    },
+	    legend: {
+	    	enabled: false
+	    }
+
+	})
+	</script>
+</body>
+</html>
